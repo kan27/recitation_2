@@ -44,11 +44,6 @@ def work_calc(n, a, b, f):
 	return a*work_calc(n//b, a, b, f) + f(n)
 	pass
 
-for n in [1, 2, 4, 8, 16, 32, 64, 128]: #test work_calc
-    w_1 = work_calc(n, 2, 2, lambda x: 1)
-    w_2 = work_calc(n, 2, 2, lambda x: x)
-    w_3 = work_calc(n, 2, 2, lambda x: x**2)
-    print(f"n={n:3d} | f(n)=1: {w_1:4d} | f(n)=n: {w_2:5d} | f(n)=n^2: {w_3:6d}") #used claude for this line to get neat printing
 
 def span_calc(n, a, b, f):
 	"""Compute the span associated with the recurrence $W(n) = aW(n/b) + f(n)
@@ -114,8 +109,16 @@ def test_compare_work():
 	# create work_fn1
 	# create work_fn2
 	
-	res = compare_work(work_fn1, work_fn2)
-	print_work_results(res)
+    work_fn1 = lambda n: work_calc(n, 2, 2, lambda x: 1)
+    work_fn2 = lambda n: work_calc(n, 2, 2, lambda x: x)
+    work_fn3 = lambda n: work_calc(n, 2, 2, lambda x: x**2)
+
+    # Generate tables to copy into answers.md
+    print("\n--- f(n)=1 vs f(n)=n ---")
+    print_work_results(compare_work(work_fn1, work_fn2, sizes=[1, 2, 4, 8, 16, 32, 64, 128]))
+
+    print("\n--- f(n)=n vs f(n)=n^2 ---")
+    print_work_results(compare_work(work_fn2, work_fn3, sizes=[1, 2, 4, 8, 16, 32, 64, 128]))
 
 def compare_span(span_fn1, span_fn2, sizes=[10, 20, 50, 100, 1000, 5000, 10000]):
 	"""
@@ -141,3 +144,5 @@ def compare_span(span_fn1, span_fn2, sizes=[10, 20, 50, 100, 1000, 5000, 10000])
 			span_fn2
 			))
 	return result
+
+test_compare_work()

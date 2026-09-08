@@ -15,15 +15,29 @@ Place all written answers from `recitation-02.md` here for easier grading.
   3. W(n) = 2*W(n/2) + n^2
     Cost is asymptotically dominated by the root, we only need to consider the root's cost. Thus, final cost is $W(n) \in O(n^2)$
 
-    These interpretations match data I've generated
-    n=  1 | f(n)=1:    1 | f(n)=n:     1 | f(n)=n^2:      1
-    n=  2 | f(n)=1:    3 | f(n)=n:     4 | f(n)=n^2:      6
-    n=  4 | f(n)=1:    7 | f(n)=n:    12 | f(n)=n^2:     28
-    n=  8 | f(n)=1:   15 | f(n)=n:    32 | f(n)=n^2:    120
-    n= 16 | f(n)=1:   31 | f(n)=n:    80 | f(n)=n^2:    496
-    n= 32 | f(n)=1:   63 | f(n)=n:   192 | f(n)=n^2:   2016
-    n= 64 | f(n)=1:  127 | f(n)=n:   448 | f(n)=n^2:   8128
-    n=128 | f(n)=1:  255 | f(n)=n:  1024 | f(n)=n^2:  32640
+    --- f(n)=1 vs f(n)=n ---
+|   n |   W_1 |   W_2 |
+|-----|-------|-------|
+|   1 |     1 |     1 |
+|   2 |     3 |     4 |
+|   4 |     7 |    12 |
+|   8 |    15 |    32 |
+|  16 |    31 |    80 |
+|  32 |    63 |   192 |
+|  64 |   127 |   448 |
+| 128 |   255 |  1024 |
+
+--- f(n)=n vs f(n)=n^2 ---
+|   n |   W_1 |   W_2 |
+|-----|-------|-------|
+|   1 |     1 |     1 |
+|   2 |     4 |     6 |
+|   4 |    12 |    28 |
+|   8 |    32 |   120 |
+|  16 |    80 |   496 |
+|  32 |   192 |  2016 |
+|  64 |   448 |  8128 |
+| 128 |  1024 | 32640 |
 
 - **5) (4 points)** Now that you have a nice way to empirically 
   generate values of $W(n)$, we can look at the relationship 
