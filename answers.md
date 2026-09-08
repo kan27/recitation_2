@@ -60,4 +60,33 @@ Place all written answers from `recitation-02.md` here for easier grading.
 
   3. $\log_b a > c$ 
 
+To derive the asympottic behavior of $T(n) = aT(n/b) + n^c$, we need to analyze the recursion tree level by level.
+Recursion Tree Structure:
+Root:, Work = $n^c$
+Level 1: $a$ ndes of size $n/b$, Work = $a*(\frac{n}{b})^c$ = $n^c * (\frac{a}{b^c})$
+Level 2:, Work = $a^2*(\frac{n}{b^2})^c$ = $n^c * (\frac{a}{b^c})^2$
+Level d: Work = $a^d*(\frac{n}{b^d})^c$ = $n^c * (\frac{a}{b^c})^d$
+Leaf-Level ($d=\log_b n$, d is the level when $b^d = 1$): $a^(\log_b n) = n^(\log_b a)$ leaves, each performing O(1) work, so the work of all the leaves is $O(n^(\log_b a))$
+Summing the work across all the levels d=0(root) to leaves:
+$$T(n) = n^c \sum_{d=0}^{\log_b n - 1} \left(\frac{a}{b^c}\right)^d + \Theta(n^{\log_b a})$$
+The growth factor between levels is $r=\frac{a}{b^c}$. Comparing $\log_b a$ to c determines whether $r<1, r=1, r>1$
+
+Case 1: $log_b a < c$ (Root-dominated because the work done at each level shrinks like geometric decay, meaining the bulk of the work is at the root)
+Summation: the geometric series converges
+$$\sum_{d=0}^{\log_b n - 1} \left(\frac{a}{b^c}\right)^d \leq \sum_{d=0}^{\log_b n - 1} \left(r\right)^d = \frac{1}{1-r} = \Theta(1)$$
+Thus total work is:
+$$T(n) = n^c * \Theta(1) + \Theta(n^{\log_b a})$$
+Since, the root work dominates the leaf work
+$$T(n) = \Theta(n^c)$$
+
+Case 2: $log_b a = c$ (Balanced because the work done at each level is the same)
+Summation: There are $\log_b n$levels, each contributing $n^c$
+$$\sum_{d=0}^{\log_b n - 1} \left(1)^d = \log_b n$$
+Total work is thus:
+$$T(n) = n^c * \Theta(log_b n) + \Theta(n^{\log_b a})$$
+Remembering that $c = \log_b a$:
+$$T(n) = \Theta(n^c\log n)$$
+
+Case 3: $log_b a > c$ (Leaf-dominated because the work done at each level increases geometrically, meaining the bulk of the work is at the leaves)
+
 - **7) (2 points)** Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
