@@ -17,6 +17,11 @@ def simple_work_calc(n, a, b):
 
 	Returns: the value of W(n).
 	"""
+	if n<= 1:
+		return n
+
+	return a*simple_work_calc(n//b, a, b) + n
+
 	# TODO
 	pass
 
@@ -33,7 +38,17 @@ def work_calc(n, a, b, f):
 	Returns: the value of W(n).
 	"""
 	# TODO
+	if n<= 1:
+		return f(n)
+	
+	return a*work_calc(n//b, a, b, f) + f(n)
 	pass
+
+for n in [1, 2, 4, 8, 16, 32, 64, 128]: #test work_calc
+    w_1 = work_calc(n, 2, 2, lambda x: 1)
+    w_2 = work_calc(n, 2, 2, lambda x: x)
+    w_3 = work_calc(n, 2, 2, lambda x: x**2)
+    print(f"n={n:3d} | f(n)=1: {w_1:4d} | f(n)=n: {w_2:5d} | f(n)=n^2: {w_3:6d}") #used claude for this line to get neat printing
 
 def span_calc(n, a, b, f):
 	"""Compute the span associated with the recurrence $W(n) = aW(n/b) + f(n)
@@ -48,6 +63,10 @@ def span_calc(n, a, b, f):
 	Returns: the value of W(n).
 	"""
 	# TODO
+	if n <= 1:
+		return f(n)
+
+	return span_calc(n // b, a, b, f) + f(n)
 	pass
 
 def compare_work(work_fn1, work_fn2, sizes=[10, 20, 50, 100, 1000, 5000, 10000]):
