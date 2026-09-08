@@ -88,5 +88,12 @@ Remembering that $c = \log_b a$:
 $$T(n) = \Theta(n^c\log n)$$
 
 Case 3: $log_b a > c$ (Leaf-dominated because the work done at each level increases geometrically, meaining the bulk of the work is at the leaves)
+Summation:
+$$n^c * \sum_{d=0}^{\log_b n - 1} \left(\frac{a}{b^c}\right)^d = n^c * \Theta((\frac{a}{b^c}))^(log_b n) = n^c * \Theta(\frac{a^(log_b n)}{(b^(log_b n))^c}) = n^c * \Theta(\frac{n^(log_b a)}{n^c}) = \Theta(n^(log_b a))$$
+Total work:
+$$ T(n) = \Theta(n^(log_b a)) + \Theta(n^(log_b a)) $$
+
+$$ T(n) = \Theta(n^(log_b a)) $$
+
 
 - **7) (2 points)** Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
