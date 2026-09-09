@@ -140,9 +140,25 @@ def compare_span(span_fn1, span_fn2, sizes=[10, 20, 50, 100, 1000, 5000, 10000])
 		# compute S(n) using current a, b, f
 		result.append((
 			n,
-			span_fn1,
-			span_fn2
+			span_fn1(n),
+			span_fn2(n)
 			))
 	return result
 
-test_compare_work()
+def test_compare_span():
+    # Curry span_calc for a=2, b=2 across the three f(n) functions
+    span_fn1 = lambda n: span_calc(n, 2, 2, lambda x: 1)
+    span_fn2 = lambda n: span_calc(n, 2, 2, lambda x: x)
+    span_fn3 = lambda n: span_calc(n, 2, 2, lambda x: x**2)
+
+    sizes = [1, 2, 4, 8, 16, 32, 64, 128]
+
+    # Generate Github-formatted tables to copy into answers.md for Problem 7
+    print("\n--- SPAN: f(n)=1 vs f(n)=n ---")
+    print_span_results(compare_span(span_fn1, span_fn2, sizes=sizes))
+
+    print("\n--- SPAN: f(n)=n vs f(n)=n^2 ---")
+    print_span_results(compare_span(span_fn2, span_fn3, sizes=sizes))
+
+#test_compare_work()
+test_compare_span()

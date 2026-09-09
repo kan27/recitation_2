@@ -14,7 +14,7 @@ Place all written answers from `recitation-02.md` here for easier grading.
     Cost is constant across all levels in the tree (C(0) = n, C(1) = n). Total levels in the tree is $\lg n + 1$, Cost per level is n. Total cost across all levels is $n*(\lg n + 1)$. Final cost is $W(n) \in O(n\lg n)$
   3. W(n) = 2*W(n/2) + n^2
     Cost is asymptotically dominated by the root, we only need to consider the root's cost. Thus, final cost is $W(n) \in O(n^2)$
-
+Here are empricial results to align with theoretical derivations
     --- f(n)=1 vs f(n)=n ---
 |   n |   W_1 |   W_2 |
 |-----|-------|-------|
@@ -97,3 +97,62 @@ $$ T(n) = \Theta(n^(log_b a)) $$
 
 
 - **7) (2 points)** Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
+
+  1. f(n) = 1
+  $S(n) = S(n/2) + 1$
+  work at level d is 1
+  Tree depth is $\log_2 n$
+  Summation:
+  $$ S(n) = \sum_{d=0}^{\log_2 n - 1} 1 + S(1) = \log_2 n + 1$$
+  Asymptotic expression = $\Theta(log n)$
+
+  2. f(n) = n
+  $S(n) = S(n/2) + n$
+  Level 0 = n
+  Level 1 = n/2
+  Level 2 = n/4
+  Level d = $n/(2^d)$
+  Summation:
+  $$ S(n) = \sum_{d=0}^{\log_2 n - 1} \frac{n}{2^d} = n*\sum_{d=0}^{\log_2 n - 1} (\frac{1}{2})^d$$
+
+  Geometrically decreases, converges to 2
+  Asymptotic expression: S(n) = $n*\Theta(1)$ = $\Theta(n)$
+
+  3. f(n)=$n^2$
+  $S(n) = S(n/2) + n^2$
+  Level 0 = $n^2$
+  Level 1 = $\frac{n^2}{4}$
+  Level 2 = $\frac{n^2}{16}$
+  Level 3 = $\frac{n^2}{4^d}$
+  Summation:
+  $$S(n) = \sum_{d=0}^{\log_2 n - 1} \frac{n^2}{4^d} = n^2*\sum_{d=0}^{\log_2 n - 1} (\frac{1}{4})^d
+
+  Geometrically decreases, converges to 4/3
+  Asymptotic expression: S(n) = $n^2*\Theta(1)$ = $\Theta(n^2)$
+
+Here are empirical results to align with theoretical derivations
+
+--- SPAN: f(n)=1 vs f(n)=n ---
+|   n |   S_1 |   S_2 |
+|-----|-------|-------|
+|   1 |     1 |     1 |
+|   2 |     2 |     3 |
+|   4 |     3 |     7 |
+|   8 |     4 |    15 |
+|  16 |     5 |    31 |
+|  32 |     6 |    63 |
+|  64 |     7 |   127 |
+| 128 |     8 |   255 |
+
+--- SPAN: f(n)=n vs f(n)=n^2 ---
+|   n |   S_1 |   S_2 |
+|-----|-------|-------|
+|   1 |     1 |     1 |
+|   2 |     3 |     5 |
+|   4 |     7 |    21 |
+|   8 |    15 |    85 |
+|  16 |    31 |   341 |
+|  32 |    63 |  1365 |
+|  64 |   127 |  5461 |
+| 128 |   255 | 21845 |
+
