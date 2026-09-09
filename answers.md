@@ -95,6 +95,8 @@ $$ T(n) = \Theta(n^(\log_b a)) + \Theta(n^(\log_b a)) $$
 
 $$ T(n) = \Theta(n^(\log_b a)) $$
 
+*My answer here incorporates the brick method to an extent, when defining the function as root-dominated, leaf-dominated, or balanced, because I missed classes and read ahead in notes on the Brick Method to catch up!*
+
 
 - **7) (2 points)** Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
 
