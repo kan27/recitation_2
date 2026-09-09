@@ -85,7 +85,7 @@ $$\sum_{d=0}^{\log_b n - 1} \left(1)^d = \log_b n$$
 Total work is thus:
 $$T(n) = n^c * \Theta(log_b n) + \Theta(n^{\log_b a})$$
 Remembering that $c = \log_b a$:
-$$T(n) = \Theta(n^c\log n)$$
+$$T(n) = \Theta(n^c\log_b n)$$
 
 Case 3: $log_b a > c$ (Leaf-dominated because the work done at each level increases geometrically, meaining the bulk of the work is at the leaves)
 Summation:
